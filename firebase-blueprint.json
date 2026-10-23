@@ -1,0 +1,83 @@
+{
+  "entities": {
+    "Task": {
+      "title": "Task",
+      "description": "A prioritized to-do task item with deadline, importance, effort, and synchronization metadata",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "UID of the task owner"
+        },
+        "title": {
+          "type": "string",
+          "description": "Short title of the task"
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description or notes for the task"
+        },
+        "importance": {
+          "type": "integer",
+          "description": "Importance level: 1 (Low), 2 (Medium), 3 (High), 4 (Urgent)"
+        },
+        "estimatedEffortMinutes": {
+          "type": "integer",
+          "description": "Estimated time to complete in minutes"
+        },
+        "dueDate": {
+          "type": "integer",
+          "description": "Epoch timestamp in milliseconds for task deadline, or 0 if none"
+        },
+        "completed": {
+          "type": "boolean",
+          "description": "Whether the task has been completed"
+        },
+        "category": {
+          "type": "string",
+          "description": "Category tag e.g. Work, Personal, Health, Study"
+        },
+        "priorityScore": {
+          "type": "number",
+          "description": "Calculated intelligent priority score based on deadline urgency, importance, and effort"
+        },
+        "notificationEnabled": {
+          "type": "boolean",
+          "description": "Whether smart reminder notifications are enabled for this task"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when task was created; write FieldValue.serverTimestamp()"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when task was last modified; write FieldValue.serverTimestamp()"
+        }
+      },
+      "required": [
+        "userId",
+        "title",
+        "description",
+        "importance",
+        "estimatedEffortMinutes",
+        "dueDate",
+        "completed",
+        "category",
+        "priorityScore",
+        "notificationEnabled",
+        "createdAt",
+        "updatedAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/tasks/{taskId}": {
+      "schema": {
+        "$ref": "#/entities/Task"
+      },
+      "description": "User to-do tasks collection partitioned by user ownership"
+    }
+  }
+}
